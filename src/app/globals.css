@@ -1,9 +1,31 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --breakpoint-connexion: 36rem;
+  --breakpoint-catalogue: 45rem;
+  --breakpoint-circulaire: 50rem;
+  --breakpoint-ressources: 60rem;
+  --breakpoint-panier: 65rem;
+  --breakpoint-dossier: 72rem;
+  --breakpoint-contact: 77rem;
+  --breakpoint-hamburger: 77rem;
+  --breakpoint-b600: 600px;
 }
+
+
+:root {
+  --background: #f3f4f6;       /* gris clair */
+  --foreground: #1f2937;       /* gris foncé */
+  --card: #ffffff;             /* blanc pur */
+  --accent: #047857;           /* vert pharmacie */
+  --accent-dark: #065f46;      /* vert foncé */
+  --radius: 8px;               /* arrondi uniforme */
+  --shadow: 0 4px 12px rgba(0,0,0,0.1); /* ombre douce */
+  --label: #111827; /* gris très foncé, presque noir */
+  --placeholder: #cccccc; /* gray-600 */
+  --input: #555555;
+}
+
 
 @theme inline {
   --color-background: var(--background);
@@ -15,7 +37,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #111827;
   }
 }
 
@@ -23,4 +45,24 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+input::placeholder {
+  color: var(--placeholder);
+  opacity: 1; /* important : sinon les navigateurs les rendent trop pâles */
+}
+
+input {
+  color: var(--input);
+}
+
+p:not(.text-override) {
+  color: var(--foreground);
+}
+
+
+@media screen {
+  main {
+    
+  }
 }

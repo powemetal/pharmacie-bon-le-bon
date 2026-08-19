@@ -1,25 +1,52 @@
-export default function Page() {
+export default function PageConnexion() {
   return (
-    <div className="flex flex-col items-center justify-center py-20 text-center">
+    <main className="flex justify-center items-center py-20">
+      <div className="w-full max-w-md bg-white p-8 rounded-[var(--radius)] shadow-lg border border-[var(--accent)]">
+        
+        <h1 className="text-3xl font-bold mb-6 text-center text-[var(--accent-dark)]">
+          Connexion
+        </h1>
 
-      <div className="text-6xl mb-6">🚧</div>
+        <form className="flex flex-col gap-4">
+          
+          <div className="flex flex-col">
+            <label className="mb-1 font-medium text-[var(--label)]">Courriel</label>
+            <input
+              name="email"
+              type="email"
+              placeholder="exemple@courriel.com"
+              className="border rounded px-3 py-2"
+              required
+            />
+          </div>
 
-      <h1 className="text-3xl font-bold mb-4">
-        Page Connexion en construction
-      </h1>
+          <div className="flex flex-col">
+            <label className="mb-1 font-medium text-[var(--label)]">Mot de passe</label>
+            <input
+              name="password"
+              type="password"
+              placeholder="Votre mot de passe"
+              className="border rounded px-3 py-2"
+              required
+            />
+          </div>
 
-      <p className="max-w-md text-gray-600">
-        Cette section de la Pharmacie Bon Le Bon est présentement en développement.
-        Revenez bientôt pour découvrir les nouvelles fonctionnalités.
-      </p>
+          <button
+            type="submit"
+            className="bg-[var(--accent)] text-white py-2 rounded-[var(--radius)] hover:bg-[var(--accent-dark)] transition"
+          >
+            Se connecter
+          </button>
+        </form>
 
-      {/* Panneau style chantier */}
-      <div className="mt-10 bg-yellow-100 border border-yellow-400 text-yellow-800 px-8 py-4 rounded-lg shadow">
-        <div className="font-semibold tracking-wide">
-          CHANTIER EN COURS
-        </div>
+        <p className="text-center text-sm mt-4">
+          Pas de compte ?{" "}
+          <a href="/enregistrer" className="text-[var(--accent)] hover:underline">
+            Créer un compte
+          </a>
+        </p>
+
       </div>
-
-    </div>
+    </main>
   );
 }

@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import "./globals.css";
 import Link from "next/link";
+import Header from "./components/Header";
+
 
 export const metadata = {
   title: "Pharmacie Bon Le Bon",
@@ -10,35 +12,14 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="fr">
-      <body className="min-h-screen flex flex-col bg-white text-gray-900">
+      <body className="flex flex-col min-h-screen bg-[var(--background)] text-[var(--foreground)]">
 
         {/* HEADER */}
-        <header className="bg-green-700 text-white shadow-md">
-          <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-
-            <Link href="/" className="text-2xl font-bold tracking-wide">
-              Pharmacie Bon Le Bon
-            </Link>
-
-            <ul className="flex gap-6 text-lg">
-              <li><Link href="/catalogue">Catalogue</Link></li>
-              <li><Link href="/circulaire">Circulaire</Link></li>
-              <li><Link href="/ressources">Ressources santé</Link></li>
-              <li><Link href="/panier">Panier</Link></li>
-              <li><Link href="/mon-dossier">Mon dossier</Link></li>
-              <li><Link href="/contact">Contact</Link></li>
-            </ul>
-
-            <div className="flex gap-4">
-              <Link href="/connexion" className="hover:underline">Connexion</Link>
-              <Link href="/enregistrer" className="hover:underline">Créer un compte</Link>
-            </div>
-
-          </nav>
-        </header>
+        <Header/>
+        
 
         {/* CONTENU */}
-        <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-10">
+        <main className="flex-1 px-4 sm:px-16 pt-24">
           {children}
         </main>
 

@@ -1,4 +1,4 @@
-import prisma from "../src/utils/prisma.js";
+import { prisma } from "./seed-prisma";
 
 async function main() {
   console.log("🌱 Nettoyage des tables...");
@@ -110,57 +110,56 @@ async function main() {
 
   console.log("🌱 Insertion des produits...");
 
-const produits = [
-  {
-    id: "p1",
-    nom: "Advil 200mg",
-    description: "Anti-inflammatoire pour douleurs légères.",
-    prix: 8.99,
-    imageUrl: "/images/produits/advil.jpg",
-    categorie: "Douleurs",
-  },
-  {
-    id: "p2",
-    nom: "Tylenol Extra-Fort",
-    description: "Soulagement rapide des maux de tête.",
-    prix: 10.49,
-    imageUrl: "/images/produits/tylenol.jpg",
-    categorie: "Douleurs",
-  },
-  {
-    id: "p3",
-    nom: "Vitamine C 500mg",
-    description: "Renforce le système immunitaire.",
-    prix: 12.99,
-    imageUrl: "/images/produits/vitamine-c.jpg",
-    categorie: "Vitamines",
-  },
-  {
-    id: "p4",
-    nom: "Bandages Elastiques",
-    description: "Support pour blessures légères.",
-    prix: 6.49,
-    imageUrl: "/images/produits/bandage-elastique.jpg",
-    categorie: "Premiers soins",
-  },
-  {
-    id: "p5",
-    nom: "Thermomètre numérique",
-    description: "Lecture rapide et précise.",
-    prix: 14.99,
-    imageUrl: "/images/produits/thermometre.jpg",
-    categorie: "Santé",
-  },
-  {
-    id: "p6",
-    nom: "Désinfectant pour les mains",
-    description: "Élimine 99% des bactéries.",
-    prix: 4.99,
-    imageUrl: "/images/produits/desinfectant.jpg",
-    categorie: "Hygiène",
-  },
-];
-
+  const produits = [
+    {
+      id: "p1",
+      nom: "Advil 200mg",
+      description: "Anti-inflammatoire pour douleurs légères.",
+      prix: 8.99,
+      imageUrl: "/images/produits/advil.jpg",
+      categorie: "Douleurs",
+    },
+    {
+      id: "p2",
+      nom: "Tylenol Extra-Fort",
+      description: "Soulagement rapide des maux de tête.",
+      prix: 10.49,
+      imageUrl: "/images/produits/tylenol.jpg",
+      categorie: "Douleurs",
+    },
+    {
+      id: "p3",
+      nom: "Vitamine C 500mg",
+      description: "Renforce le système immunitaire.",
+      prix: 12.99,
+      imageUrl: "/images/produits/vitamine-c.jpg",
+      categorie: "Vitamines",
+    },
+    {
+      id: "p4",
+      nom: "Bandages Elastiques",
+      description: "Support pour blessures légères.",
+      prix: 6.49,
+      imageUrl: "/images/produits/bandage-elastique.jpg",
+      categorie: "Premiers soins",
+    },
+    {
+      id: "p5",
+      nom: "Thermomètre numérique",
+      description: "Lecture rapide et précise.",
+      prix: 14.99,
+      imageUrl: "/images/produits/thermometre.jpg",
+      categorie: "Santé",
+    },
+    {
+      id: "p6",
+      nom: "Désinfectant pour les mains",
+      description: "Élimine 99% des bactéries.",
+      prix: 4.99,
+      imageUrl: "/images/produits/desinfectant.jpg",
+      categorie: "Hygiène",
+    },
+  ];
 
   for (const p of produits) {
     await prisma.produit.create({ data: p });
@@ -169,12 +168,36 @@ const produits = [
   console.log("🌱 Insertion des ressources santé...");
 
   const ressources = [
-    { titre: "Guide sur la grippe", contenu: "https://www.quebec.ca/sante/problemes-de-sante/grippe" },
-    { titre: "Conseils pour un sommeil réparateur", contenu: "https://www.canada.ca/fr/sante-publique/sommeil.html" },
-    { titre: "Alimentation équilibrée", contenu: "https://www.canada.ca/fr/sante-publique/alimentation.html" },
-    { titre: "Gestion du stress", contenu: "https://www.quebec.ca/sante/stress-anxiete" },
-    { titre: "Prévention des blessures", contenu: "https://www.santemontreal.qc.ca/prevention" },
-    { titre: "Vaccination au Québec", contenu: "https://www.quebec.ca/sante/vaccination" },
+    {
+      titre: "Guide sur la grippe",
+      description: "Informations essentielles sur les symptômes, la prévention et les traitements de la grippe.",
+      url: "https://www.quebec.ca/sante/problemes-de-sante/grippe",
+    },
+    {
+      titre: "Conseils pour un sommeil réparateur",
+      description: "Recommandations pour améliorer la qualité du sommeil et adopter de bonnes habitudes.",
+      url: "https://www.canada.ca/fr/sante-publique/sommeil.html",
+    },
+    {
+      titre: "Alimentation équilibrée",
+      description: "Principes d'une alimentation saine et équilibrée pour maintenir une bonne santé.",
+      url: "https://www.canada.ca/fr/sante-publique/alimentation.html",
+    },
+    {
+      titre: "Gestion du stress",
+      description: "Techniques et conseils pour réduire le stress et favoriser le bien-être mental.",
+      url: "https://www.quebec.ca/sante/stress-anxiete",
+    },
+    {
+      titre: "Prévention des blessures",
+      description: "Ressources pour prévenir les blessures courantes et adopter des comportements sécuritaires.",
+      url: "https://www.santemontreal.qc.ca/prevention",
+    },
+    {
+      titre: "Vaccination au Québec",
+      description: "Informations sur les vaccins disponibles, leur importance et les calendriers de vaccination.",
+      url: "https://www.quebec.ca/sante/vaccination",
+    },
   ];
 
   for (const r of ressources) {
@@ -204,6 +227,86 @@ const produits = [
 
   for (const p of paniers) {
     await prisma.panier.create({ data: p });
+  }
+
+  console.log("🌱 Récupération des paniers créés...");
+
+  const paniersCreees = await prisma.panier.findMany();
+
+  console.log("🌱 Insertion des items de panier...");
+
+  const itemsPanier = [
+    {
+      panierId: paniersCreees.find((p) => p.utilisateurId === "u1")!.id,
+      produitId: "p1",
+      quantite: 2,
+    },
+    {
+      panierId: paniersCreees.find((p) => p.utilisateurId === "u1")!.id,
+      produitId: "p3",
+      quantite: 1,
+    },
+    {
+      panierId: paniersCreees.find((p) => p.utilisateurId === "u2")!.id,
+      produitId: "p2",
+      quantite: 1,
+    },
+    {
+      panierId: paniersCreees.find((p) => p.utilisateurId === "u3")!.id,
+      produitId: "p6",
+      quantite: 3,
+    },
+  ];
+
+  for (const item of itemsPanier) {
+    await prisma.itemPanier.create({ data: item });
+  }
+
+  console.log("🌱 Insertion des commandes...");
+
+  const commandes = [
+    {
+      id: "cmd1",
+      utilisateurId: "u1",
+      total: 29.97,
+      items: {
+        create: [
+          { produitId: "p1", quantite: 2, prix: 8.99 },
+          { produitId: "p3", quantite: 1, prix: 12.99 },
+        ],
+      },
+    },
+    {
+      id: "cmd2",
+      utilisateurId: "u2",
+      total: 10.49,
+      items: {
+        create: [{ produitId: "p2", quantite: 1, prix: 10.49 }],
+      },
+    },
+  ];
+
+  for (const cmd of commandes) {
+    await prisma.commande.create({ data: cmd });
+  }
+
+  console.log("🌱 Insertion des ordonnances...");
+
+  const ordonnances = [
+    {
+      utilisateurId: "u3",
+      fichierUrl: "/ordonnances/ordonnance-emma.pdf",
+      statut: "soumis",
+    },
+    {
+      utilisateurId: "u4",
+      fichierUrl: "/ordonnances/ordonnance-tom.pdf",
+      statut: "soumis",
+    },
+  ];
+
+  for (const o of ordonnances) {
+    await prisma.ordonnance.create({ data: o });
   }
 
   console.log("🌱 Insertion des informations de contact...");

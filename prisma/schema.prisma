@@ -130,7 +130,8 @@ model Ordonnance {
 model RessourceSante {
   id        String   @id @default(uuid())
   titre     String
-  contenu   String
+  description   String
+  url String
   creeLe    DateTime @default(now())
 }
 
