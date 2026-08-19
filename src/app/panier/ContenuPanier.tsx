@@ -7,6 +7,7 @@ import {
   supprimerItem,
   viderPanier,
 } from "@/lib/actions/panier";
+import {useRouter} from "next/navigation";
 
 type ItemAvecProduit = {
   id: string;
@@ -31,6 +32,7 @@ const TAUX_TVQ = 0.09975;
 
 export default function ContenuPanier({ panier }: PanierProps) {
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const items = panier?.items || [];
 
@@ -65,8 +67,7 @@ export default function ContenuPanier({ panier }: PanierProps) {
   };
 
   const handleReglerCommande = () => {
-    alert("Redirection vers la passerelle de paiement...");
-    // Rediriger vers la page de paiement ou exécuter l'action de création de commande
+    router.push("/paiment");
   };
 
   if (items.length === 0) {
