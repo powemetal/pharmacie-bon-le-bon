@@ -14,12 +14,12 @@ export default function Header() {
         {/* LEFT — Logo cliquable */}
         <Link href="/" className="flex items-center flex-shrink-0">
           <Image
-            src="/images/logo/logo_bon_le_bon.png"
+            src="/images/logo/logobonlebonv2.png"
             alt="Logo Pharmacie Bon Le Bon"
             width={120}
             height={120}
             priority
-            className="object-contain"
+            className="object-contain w-50"
           />
         </Link>
 
