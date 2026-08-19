@@ -56,9 +56,9 @@ input {
   color: var(--input);
 }
 
-p:not(.text-override) {
+/* p:not(.text-override) {
   color: var(--foreground);
-}
+} */
 
 
 @media screen {
