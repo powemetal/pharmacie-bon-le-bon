@@ -15,14 +15,14 @@ export default async function MonDossierPage() {
 
   if (!user) {
     return (
-      <main className="pt-24 px-16 @[b600]:px-4">
+      <main className="pt-24 px-16 b600:px-4">
         <p className="text-red-500">Utilisateur introuvable.</p>
       </main>
     );
   }
 
   return (
-    <main className="pt-24 px-16 @[b600]:px-4">
+    <main className="pt-24 px-16 b600:px-4">
       <section className="max-w-5xl mx-auto">
 
         {/* TITRE */}
