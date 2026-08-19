@@ -1,34 +1,18 @@
-"use client";
-
-import { useState } from "react";
 import { loginUtilisateur } from "@/lib/services/auth";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 export default function PageConnexion() {
-  const router = useRouter();
-  const [msgErreur, setMsgErreur] = useState("");
+  async function handleSubmit(formData: FormData) {
+    "use server";
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setMsgErreur("");
-
-    const form = new FormData(e.currentTarget);
-
-    const courriel = form.get("courriel")?.toString() || "";
-    const motDePasse = form.get("motDePasse")?.toString() || "";
+    const courriel = formData.get("courriel")?.toString() || "";
+    const motDePasse = formData.get("motDePasse")?.toString() || "";
 
     try {
-      const data = await loginUtilisateur({
-        courriel,
-        motDePasse,
-      });
-
-      // Si tu veux stocker le token :
-      // localStorage.setItem("token", data.token);
-
-      router.push("/"); // redirection après connexion
+      await loginUtilisateur({ courriel, motDePasse });
+      redirect("/"); // redirection serveur
     } catch (err: any) {
-      setMsgErreur(err.message || "Erreur lors de la connexion.");
+      return err.message || "Erreur lors de la connexion.";
     }
   }
 
@@ -40,7 +24,7 @@ export default function PageConnexion() {
           Connexion
         </h1>
 
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        <form action={handleSubmit} className="flex flex-col gap-4">
           
           {/* Courriel */}
           <div className="flex flex-col">
@@ -65,11 +49,6 @@ export default function PageConnexion() {
               required
             />
           </div>
-
-          {/* Erreur */}
-          {msgErreur && (
-            <p className="text-red-600 text-sm">{msgErreur}</p>
-          )}
 
           <button
             type="submit"

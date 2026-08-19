@@ -1,44 +1,46 @@
+"use server";
 
+import { prisma } from "@/lib/prisma";
 
 export async function inscrireUtilisateur(data: {
   courriel: string;
   pseudonyme: string;
   motDePasse: string;
 }) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/register`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
+  const existant = await prisma.utilisateur.findUnique({
+    where: { courriel: data.courriel },
   });
 
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.message || "Erreur lors de l'inscription");
+  if (existant) {
+    throw new Error("Un utilisateur avec ce courriel existe déjà.");
   }
 
-  return res.json(); // { user, token }
+  const user = await prisma.utilisateur.create({
+    data: {
+      courriel: data.courriel,
+      pseudonyme: data.pseudonyme,
+      motDePasse: data.motDePasse,
+    },
+  });
+
+  return user;
 }
-
-
 
 export async function loginUtilisateur(data: {
   courriel: string;
   motDePasse: string;
 }) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
+  const user = await prisma.utilisateur.findUnique({
+    where: { courriel: data.courriel },
   });
 
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.message || "Erreur lors de la connexion");
+  if (!user) {
+    throw new Error("Utilisateur introuvable.");
   }
 
-  return res.json(); // { user, token }
+  if (user.motDePasse !== data.motDePasse) {
+    throw new Error("Mot de passe incorrect.");
+  }
+
+  return user;
 }
