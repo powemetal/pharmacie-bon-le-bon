@@ -1,4 +1,36 @@
+"use client";
+
+import { useState } from "react";
+import { inscrireUtilisateur } from "@/lib/services/auth";
+import { useRouter } from "next/navigation";
+
 export default function PageEnregistrement() {
+  const router = useRouter();
+  const [msgErreur, setMsgErreur] = useState("");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setMsgErreur("");
+
+    const form = new FormData(e.currentTarget);
+
+    const courriel = form.get("courriel")?.toString() || "";
+    const pseudonyme = form.get("pseudonyme")?.toString() || "";
+    const motDePasse = form.get("motDePasse")?.toString() || "";
+
+    try {
+      await inscrireUtilisateur({
+        courriel,
+        pseudonyme,
+        motDePasse,
+      });
+
+      router.push("/connexion");
+    } catch (err: any) {
+      setMsgErreur(err.message || "Une erreur est survenue.");
+    }
+  }
+
   return (
     <main className="flex justify-center items-center py-20">
       <div className="w-full max-w-md bg-[var(--card)] p-8 rounded-[var(--radius)] shadow-[var(--shadow)] border border-[var(--accent)]">
@@ -7,13 +39,13 @@ export default function PageEnregistrement() {
           Créer un compte
         </h1>
 
-        <form className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
 
           {/* Courriel */}
           <div className="flex flex-col">
             <label className="mb-1 font-medium text-[var(--label)]">Courriel</label>
             <input
-              name="email"
+              name="courriel"
               type="email"
               placeholder="exemple@courriel.com"
               className="border rounded px-3 py-2 placeholder-[var(--placeholder)] text-[var(--input)]"
@@ -25,7 +57,7 @@ export default function PageEnregistrement() {
           <div className="flex flex-col">
             <label className="mb-1 font-medium text-[var(--label)]">Pseudo</label>
             <input
-              name="pseudo"
+              name="pseudonyme"
               type="text"
               placeholder="Votre nom d'utilisateur"
               className="border rounded px-3 py-2 placeholder-[var(--placeholder)] text-[var(--input)]"
@@ -37,13 +69,18 @@ export default function PageEnregistrement() {
           <div className="flex flex-col">
             <label className="mb-1 font-medium text-[var(--label)]">Mot de passe</label>
             <input
-              name="password"
+              name="motDePasse"
               type="password"
               placeholder="Votre mot de passe"
               className="border rounded px-3 py-2 placeholder-[var(--placeholder)] text-[var(--input)]"
               required
             />
           </div>
+
+          {/* Erreur */}
+          {msgErreur && (
+            <p className="text-red-600 text-sm">{msgErreur}</p>
+          )}
 
           {/* Bouton */}
           <button
