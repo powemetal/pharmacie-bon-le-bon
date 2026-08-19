@@ -105,7 +105,7 @@ async function main() {
   ];
 
   for (const u of utilisateurs) {
-    await prisma.utilisateur.create({ data: u });
+    await prisma.utilisateur.create({ data: u as any });
   }
 
   console.log("🌱 Insertion des produits...");
