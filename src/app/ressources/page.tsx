@@ -1,25 +1,38 @@
-export default function Page() {
+import { getRessources } from "@/lib/services/ressources";
+
+export default async function RessourcesPage() {
+  const ressources = await getRessources();
+
   return (
-    <div className="flex flex-col items-center justify-center py-20 text-center">
+    <main className="">
+      <section className="max-w-5xl mx-auto">
 
-      <div className="text-6xl mb-6">🚧</div>
+        <h1 className="text-4xl font-bold text-green-200 mb-6">
+          Ressources santé
+        </h1>
 
-      <h1 className="text-3xl font-bold mb-4">
-        Page Ressources en construction
-      </h1>
+        <p className="text-lg opacity-80 mb-10 !text-green-300">
+          Une sélection de ressources fiables pour vous aider à mieux comprendre votre santé.
+        </p>
 
-      <p className="max-w-md text-gray-600">
-        Cette section de la Pharmacie Bon Le Bon est présentement en développement.
-        Revenez bientôt pour découvrir les nouvelles fonctionnalités.
-      </p>
-
-      {/* Panneau style chantier */}
-      <div className="mt-10 bg-yellow-100 border border-yellow-400 text-yellow-800 px-8 py-4 rounded-lg shadow">
-        <div className="font-semibold tracking-wide">
-          CHANTIER EN COURS
+        <div className="grid gap-8 md:grid-cols-2">
+          {ressources.map((r) => (
+            <a
+              key={r.id}
+              href={r.url}
+              target="_blank"
+              className="block bg-white shadow-md rounded-lg p-6 hover:shadow-xl hover:-translate-y-1 transition-all"
+            >
+              <h2 className="text-xl font-semibold mb-2">{r.titre}</h2>
+              <p className="opacity-80 mb-4">{r.description}</p>
+              <span className="text-green-700 font-medium underline">
+                Visiter le site →
+              </span>
+            </a>
+          ))}
         </div>
-      </div>
 
-    </div>
+      </section>
+    </main>
   );
 }
