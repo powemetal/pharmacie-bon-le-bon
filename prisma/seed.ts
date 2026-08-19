@@ -1,4 +1,4 @@
-import prisma from "../src/utils/prisma.js";
+import { prisma } from "@/lib/prisma";
 
 async function main() {
   console.log("🌱 Nettoyage des tables...");

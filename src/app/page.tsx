@@ -1,4 +1,6 @@
-export default function Page() {
+import { prisma } from "@/lib/prisma";
+
+export default async function Page() {
   return (
     <section className="space-y-10">
 
