@@ -6,16 +6,11 @@ export default async function RessourcesPage() {
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
       <section className="max-w-5xl mx-auto">
-
         {/* TITRE */}
-        <h1 className="text-4xl font-bold mb-6 text-[var(--accent)]">
-          Ressources santé
-        </h1>
+        <h1 className="text-4xl font-bold mb-6 text-[var(--accent)]">Ressources santé</h1>
 
         {/* SOUS-TITRE */}
-        <p className="text-lg mb-10 opacity-80 text-[var(--accent-dark)]">
-          Une sélection de ressources fiables pour vous aider à mieux comprendre votre santé.
-        </p>
+        <p className="text-lg mb-10 opacity-80 text-[var(--accent-dark)]">Une sélection de ressources fiables pour vous aider à mieux comprendre votre santé.</p>
 
         {/* LISTE */}
         <div className="grid gap-8 md:grid-cols-2">
@@ -35,21 +30,14 @@ export default async function RessourcesPage() {
                 transition-all
               "
             >
-              <h2 className="text-xl font-semibold mb-2 text-[var(--foreground)]">
-                {r.titre}
-              </h2>
+              <h2 className="text-xl font-semibold mb-2 text-[var(--foreground)]">{r.titre}</h2>
 
-              <p className="opacity-80 mb-4 text-[var(--foreground)]">
-                {r.description}
-              </p>
+              <p className="opacity-80 mb-4 text-[var(--foreground)]">{r.description}</p>
 
-              <span className="font-medium underline text-[var(--accent-dark)]">
-                Visiter le site →
-              </span>
+              <span className="font-medium underline text-[var(--accent-dark)]">Visiter le site →</span>
             </a>
           ))}
         </div>
-
       </section>
     </main>
   );
