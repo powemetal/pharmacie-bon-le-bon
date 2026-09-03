@@ -12,20 +12,53 @@
   --breakpoint-b600: 600px;
 }
 
-
 :root {
-  --background: #f3f4f6;       /* gris clair */
-  --foreground: #1f2937;       /* gris foncé */
-  --card: #ffffff;             /* blanc pur */
-  --accent: #047857;           /* vert pharmacie */
-  --accent-dark: #065f46;      /* vert foncé */
-  --radius: 8px;               /* arrondi uniforme */
-  --shadow: 0 4px 12px rgba(0,0,0,0.1); /* ombre douce */
-  --label: #111827; /* gris très foncé, presque noir */
-  --placeholder: #cccccc; /* gray-600 */
+  --background: #f3f4f6;
+  --foreground: #1f2937;
+  --card: #ffffff;
+  --accent: #047857;
+  --accent-dark: #065f46;
+  --radius: 8px;
+  --shadow: 0 4px 12px rgba(0,0,0,0.1);
+  --label: #111827;
+  --placeholder: #cccccc;
   --input: #555555;
 }
 
+/* ============================
+   THEME DALTONIEN ULTRA CONTRASTE (AAA+)
+   ============================ */
+
+.colorblind {
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+
+  --accent: #0000ff;
+  --accent-dark: #0000aa;
+
+  --success: #005500;
+  --warning: #aa7700;
+  --error: #990000;
+
+  --label: #000000;
+  --placeholder: #555555;
+  --input: #000000;
+
+  --radius: 0px;
+  --shadow: none;
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --background: #ffffff;
+    --foreground: #000000;
+    --accent: #0000ff;
+    --accent-dark: #0000aa;
+    --placeholder: #555555;
+    --input: #000000;
+  }
+}
 
 @theme inline {
   --color-background: var(--background);
@@ -49,23 +82,13 @@ body {
 
 input::placeholder {
   color: var(--placeholder);
-  opacity: 1; /* important : sinon les navigateurs les rendent trop pâles */
+  opacity: 1;
 }
 
 input {
   color: var(--input);
 }
 
-/* p:not(.text-override) {
-  color: var(--foreground);
-} */
-
-
-@media screen {
-  main {
-    
-  }
-}
 @keyframes badge-pop {
   0% {
     opacity: 0;
@@ -88,5 +111,3 @@ input {
 .animate-badge-pop {
   animation: badge-pop 700ms ease-out forwards;
 }
-
-
