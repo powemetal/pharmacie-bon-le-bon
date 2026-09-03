@@ -2,36 +2,41 @@ import { redirect } from "next/navigation";
 import { getUtilisateurAvecDossier } from "@/lib/services/utilisateurs";
 
 export default async function MonDossierPage() {
-  // 🔒 Auth réelle (commentée pour la démo)
-  // const userId = null;
-  // if (!userId) {
-  //   redirect("/connexion");
-  // }
-
-  // 👇 Pour la démo, on force un utilisateur temporaire
   const userId = "u1";
-
   const user = await getUtilisateurAvecDossier(userId);
 
   if (!user) {
     return (
       <main className="pt-24 px-16 b600:px-4">
-        <p className="text-red-500">Utilisateur introuvable.</p>
+        <p style={{ color: "var(--error)" }}>Utilisateur introuvable.</p>
       </main>
     );
   }
 
   return (
-    <main className="pt-24 px-16 b600:px-4">
+    <main
+      className="pt-24 px-16 b600:px-4"
+      style={{ color: "var(--foreground)" }}
+    >
       <section className="max-w-5xl mx-auto">
 
         {/* TITRE */}
-        <h1 className="text-4xl font-bold text-green-200 mb-6">
+        <h1
+          className="text-4xl font-bold mb-6"
+          style={{ color: "var(--accent)" }}
+        >
           Mon dossier
         </h1>
 
         {/* AVERTISSEMENT UTILISATEUR TEMPORAIRE */}
-        <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 p-4 rounded-lg mb-8">
+        <div
+          className="p-4 rounded-lg mb-8 border"
+          style={{
+            background: "var(--card)",
+            borderColor: "var(--warning)",
+            color: "var(--warning)"
+          }}
+        >
           <h3 className="font-semibold text-lg mb-1">Utilisateur temporaire</h3>
           <p className="text-sm opacity-90">
             Vous consultez actuellement un dossier utilisateur temporaire.
@@ -41,8 +46,17 @@ export default async function MonDossierPage() {
         </div>
 
         {/* PROFIL */}
-        <div className="bg-white shadow-md rounded-lg p-6 mb-10 border border-green-100">
-          <h2 className="text-2xl font-semibold mb-4 text-green-700">
+        <div
+          className="shadow-md rounded-lg p-6 mb-10 border"
+          style={{
+            background: "var(--card)",
+            borderColor: "var(--accent)"
+          }}
+        >
+          <h2
+            className="text-2xl font-semibold mb-4"
+            style={{ color: "var(--accent-dark)" }}
+          >
             Informations personnelles
           </h2>
 
@@ -57,7 +71,10 @@ export default async function MonDossierPage() {
 
         {/* COMMANDES */}
         <div className="mb-10">
-          <h2 className="text-2xl font-semibold mb-4 text-green-700">
+          <h2
+            className="text-2xl font-semibold mb-4"
+            style={{ color: "var(--accent-dark)" }}
+          >
             Mes commandes
           </h2>
 
@@ -69,11 +86,17 @@ export default async function MonDossierPage() {
             {user.commandes.map((cmd) => (
               <div
                 key={cmd.id}
-                className="min-w-[300px] bg-white shadow-lg rounded-xl p-6 flex-shrink-0 border border-green-100 hover:shadow-xl transition"
+                className="min-w-[300px] shadow-lg rounded-xl p-6 flex-shrink-0 border hover:shadow-xl transition"
+                style={{
+                  background: "var(--card)",
+                  borderColor: "var(--accent)"
+                }}
               >
-                {/* Header */}
-                <div className="mb-4 pb-3 border-b border-green-200">
-                  <p className="font-semibold text-lg text-green-700">
+                <div className="mb-4 pb-3 border-b" style={{ borderColor: "var(--accent)" }}>
+                  <p
+                    className="font-semibold text-lg"
+                    style={{ color: "var(--accent-dark)" }}
+                  >
                     Commande #{cmd.id}
                   </p>
                   <p className="opacity-70 text-sm">
@@ -81,12 +104,15 @@ export default async function MonDossierPage() {
                   </p>
                 </div>
 
-                {/* Items */}
                 <ul className="space-y-2">
                   {cmd.items.map((item) => (
                     <li
                       key={item.id}
-                      className="bg-green-50 border border-green-100 rounded-md p-3"
+                      className="rounded-md p-3 border"
+                      style={{
+                        background: "var(--background)",
+                        borderColor: "var(--accent)"
+                      }}
                     >
                       <p className="font-medium">{item.produit.nom}</p>
                       <p className="text-sm opacity-70">
@@ -101,8 +127,17 @@ export default async function MonDossierPage() {
         </div>
 
         {/* ORDONNANCES */}
-        <div className="bg-white shadow-md rounded-lg p-6 mb-10 border border-green-100">
-          <h2 className="text-2xl font-semibold mb-4 text-green-700">
+        <div
+          className="shadow-md rounded-lg p-6 mb-10 border"
+          style={{
+            background: "var(--card)",
+            borderColor: "var(--accent)"
+          }}
+        >
+          <h2
+            className="text-2xl font-semibold mb-4"
+            style={{ color: "var(--accent-dark)" }}
+          >
             Mes ordonnances
           </h2>
 
@@ -111,13 +146,13 @@ export default async function MonDossierPage() {
           )}
 
           {user.ordonnances.map((o) => (
-            <div key={o.id} className="border-b pb-4 mb-4">
+            <div key={o.id} className="border-b pb-4 mb-4" style={{ borderColor: "var(--accent)" }}>
               <p><strong>ID :</strong> {o.id}</p>
               <p><strong>Statut :</strong> {o.statut}</p>
               <a
                 href={o.fichierUrl}
                 target="_blank"
-                className="text-green-700 underline"
+                style={{ color: "var(--accent-dark)", textDecoration: "underline" }}
               >
                 Voir le fichier →
               </a>
@@ -126,14 +161,27 @@ export default async function MonDossierPage() {
         </div>
 
         {/* PANIER */}
-        <div className="bg-white shadow-md rounded-lg p-6 mb-10 border border-green-100">
-          <h2 className="text-2xl font-semibold mb-4 text-green-700">
+        <div
+          className="shadow-md rounded-lg p-6 mb-10 border"
+          style={{
+            background: "var(--card)",
+            borderColor: "var(--accent)"
+          }}
+        >
+          <h2
+            className="text-2xl font-semibold mb-4"
+            style={{ color: "var(--accent-dark)" }}
+          >
             Mon panier
           </h2>
 
           <a
             href="/panier"
-            className="inline-block bg-green-700 text-white px-6 py-3 rounded-md hover:bg-green-800 transition"
+            className="inline-block px-6 py-3 rounded-md transition"
+            style={{
+              background: "var(--accent)",
+              color: "var(--background)"
+            }}
           >
             Voir mon panier →
           </a>

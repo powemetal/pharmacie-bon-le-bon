@@ -1,11 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [colorblind, setColorblind] = useState(false);
+
+  // applique la classe sur le body
+  useEffect(() => {
+    if (colorblind) {
+      document.body.classList.add("colorblind");
+    } else {
+      document.body.classList.remove("colorblind");
+    }
+  }, [colorblind]);
 
   return (
     <header className="bg-green-700 text-white shadow-md">
@@ -23,38 +33,35 @@ export default function Header() {
           />
         </Link>
 
-        {/* CENTER — Menu desktop avec collapse progressif */}
+        {/* CENTER — Menu desktop */}
         <ul className="flex gap-6 text-lg whitespace-nowrap flex-shrink">
-          {/* les settings pour le collapse progressif sont dans le fichier tailwind.config.ts à la racine du projet */}
-
-          <li className="catalogue:block hidden">
-            <Link href="/catalogue">Catalogue</Link>
-          </li>
-          <li className="circulaire:block hidden">
-            <Link href="/circulaire">Circulaire</Link>
-          </li>
-          <li className="ressources:block hidden">
-            <Link href="/ressources">Ressources santé</Link>
-          </li>
-          <li className="panier:block hidden">
-            <Link href="/panier">Panier</Link>
-          </li>
-          <li className="dossier:block hidden">
-            <Link href="/mon-dossier">Mon dossier</Link>
-          </li>
-          <li className="contact:block hidden">
-            <Link href="/contact">Contact</Link>
-          </li>
+          <li className="catalogue:block hidden"><Link href="/catalogue">Catalogue</Link></li>
+          <li className="circulaire:block hidden"><Link href="/circulaire">Circulaire</Link></li>
+          <li className="ressources:block hidden"><Link href="/ressources">Ressources santé</Link></li>
+          <li className="panier:block hidden"><Link href="/panier">Panier</Link></li>
+          <li className="dossier:block hidden"><Link href="/mon-dossier">Mon dossier</Link></li>
+          <li className="contact:block hidden"><Link href="/contact">Contact</Link></li>
         </ul>
 
-        {/* RIGHT — Actions + Hamburger */}
+        {/* RIGHT — Actions + Hamburger + Toggle Daltonien */}
         <div className="flex items-center gap-4 whitespace-nowrap flex-shrink-0">
+
+          {/* Connexion / Enregistrer */}
           <div className="hidden connexion:flex gap-1">
             <Link href="/connexion" className="hover:underline">Connexion</Link>
             <p style={{ color: "white" }}>/</p>
             <Link href="/enregistrer" className="hover:underline">Créer un compte</Link>
           </div>
 
+          {/* Toggle Daltonien */}
+          <button
+            onClick={() => setColorblind(!colorblind)}
+            className="px-3 py-1 rounded bg-white text-green-700 font-semibold text-sm hover:bg-gray-200 transition"
+          >
+            Daltonien : {colorblind ? "ON" : "OFF"}
+          </button>
+
+          {/* Hamburger */}
           <button
             className="text-4xl leading-none contact:hidden"
             onClick={() => setOpen(!open)}
