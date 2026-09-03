@@ -3,7 +3,6 @@ import "./globals.css";
 import Link from "next/link";
 import Header from "./components/Header";
 
-
 export const metadata = {
   title: "Pharmacie Bon Le Bon",
   description: "Votre pharmacie de quartier, maintenant accessible en ligne.",
@@ -15,8 +14,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="flex flex-col min-h-screen bg-[var(--background)] text-[var(--foreground)]">
 
         {/* HEADER */}
-        <Header/>
-        
+        <Header />
 
         {/* CONTENU */}
         <main className="flex-1 px-4 sm:px-16 pt-24">
@@ -24,7 +22,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </main>
 
         {/* FOOTER */}
-        <footer className="bg-green-800 text-white py-6 mt-10">
+        <footer className="bg-green-800 [.colorblind_&]:bg-blue-900 text-white py-6 mt-10 transition-colors duration-300">
           <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between">
 
             <div>
@@ -37,18 +35,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <div className="mt-4 md:mt-0">
               <h4 className="font-semibold">Liens rapides</h4>
               <ul className="mt-2 space-y-1 text-sm">
-                <li><Link href="/contact">Nous trouver</Link></li>
-                <li><Link href="/soumettre-ordonnance">Soumettre une ordonnance</Link></li>
-                <li><Link href="/profil">Profil</Link></li>
+                <li><Link href="/contact" className="hover:underline">Nous trouver</Link></li>
+                <li><Link href="/soumettre-ordonnance" className="hover:underline">Soumettre une ordonnance</Link></li>
+                <li><Link href="/profil" className="hover:underline">Profil</Link></li>
               </ul>
             </div>
 
             <div className="mt-4 md:mt-0">
               <h4 className="font-semibold">Support</h4>
               <ul className="mt-2 space-y-1 text-sm">
-                <li><Link href="/ressources">Ressources santé</Link></li>
-                <li><Link href="/connexion">Connexion</Link></li>
-                <li><Link href="/enregistrer">Créer un compte</Link></li>
+                <li><Link href="/ressources" className="hover:underline">Ressources santé</Link></li>
+                <li><Link href="/connexion" className="hover:underline">Connexion</Link></li>
+                <li><Link href="/enregistrer" className="hover:underline">Créer un compte</Link></li>
               </ul>
             </div>
 
