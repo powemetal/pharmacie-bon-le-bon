@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* ============================
+   BREAKPOINTS
+   ============================ */
 @theme {
   --breakpoint-connexion: 36rem;
   --breakpoint-catalogue: 45rem;
@@ -12,23 +15,43 @@
   --breakpoint-b600: 600px;
 }
 
+/* ============================
+   THEME PRINCIPAL
+   ============================ */
 :root {
   --background: #f3f4f6;
   --foreground: #1f2937;
   --card: #ffffff;
+
   --accent: #047857;
   --accent-dark: #065f46;
+
   --radius: 8px;
   --shadow: 0 4px 12px rgba(0,0,0,0.1);
+
   --label: #111827;
   --placeholder: #cccccc;
   --input: #555555;
+
+  /* ============================
+     COULEURS SPÉCIFIQUES CIRCULAIRE
+     ============================ */
+
+  /* Terracotta (bande décorative, badge "Cette semaine") */
+  --decor-terracotta: #8B4A2B;
+
+  /* Crème (badge circulaire) */
+  --decor-cream: #FBECA0;
+  --decor-cream-text: #5B3A1E;
+
+  /* Fond des cards circulaire — version lisible */
+  /* Ancien: #12321F (trop foncé) */
+  --decor-surface: #1E4D33; /* vert pharmacie plus clair */
 }
 
 /* ============================
    THEME DALTONIEN ULTRA CONTRASTE (AAA+)
    ============================ */
-
 .colorblind {
   --background: #ffffff;
   --foreground: #000000;
@@ -47,8 +70,17 @@
 
   --radius: 0px;
   --shadow: none;
+
+  /* Circulaire en mode daltonien */
+  --decor-terracotta: #000000;
+  --decor-cream: #ffffff;
+  --decor-cream-text: #000000;
+  --decor-surface: #ffffff; /* fond clair lisible */
 }
 
+/* ============================
+   CONTRASTE OS (prefers-contrast)
+   ============================ */
 @media (prefers-contrast: more) {
   :root {
     --background: #ffffff;
@@ -60,6 +92,9 @@
   }
 }
 
+/* ============================
+   TAILWIND THEME INLINE
+   ============================ */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -67,13 +102,23 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* ============================
+   MODE SOMBRE
+   ============================ */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #111827;
+    --foreground: #e5e7eb;
+    --card: #1a1a1a;
+
+    /* Circulaire en mode sombre */
+    --decor-surface: #163a2a; /* version sombre mais lisible */
   }
 }
 
+/* ============================
+   BASE
+   ============================ */
 body {
   background: var(--background);
   color: var(--foreground);
@@ -89,6 +134,9 @@ input {
   color: var(--input);
 }
 
+/* ============================
+   ANIMATION BADGE
+   ============================ */
 @keyframes badge-pop {
   0% {
     opacity: 0;
