@@ -19,41 +19,22 @@ export default function PageConnexion() {
   return (
     <main className="flex justify-center items-center py-20">
       <div className="w-full max-w-md bg-white p-8 rounded-[var(--radius)] shadow-lg border border-[var(--accent)]">
-        
-        <h1 className="text-3xl font-bold mb-6 text-center text-[var(--accent-dark)]">
-          Connexion
-        </h1>
+        <h1 className="text-3xl font-bold mb-6 text-center text-[var(--accent-dark)]">Connexion</h1>
 
         <form action={handleSubmit} className="flex flex-col gap-4">
-          
           {/* Courriel */}
           <div className="flex flex-col">
             <label className="mb-1 font-medium text-[var(--label)]">Courriel</label>
-            <input
-              name="courriel"
-              type="email"
-              placeholder="exemple@courriel.com"
-              className="border rounded px-3 py-2"
-              required
-            />
+            <input name="courriel" type="email" placeholder="exemple@courriel.com" className="border rounded px-3 py-2" required />
           </div>
 
           {/* Mot de passe */}
           <div className="flex flex-col">
             <label className="mb-1 font-medium text-[var(--label)]">Mot de passe</label>
-            <input
-              name="motDePasse"
-              type="password"
-              placeholder="Votre mot de passe"
-              className="border rounded px-3 py-2"
-              required
-            />
+            <input name="motDePasse" type="password" placeholder="Votre mot de passe" className="border rounded px-3 py-2" required />
           </div>
 
-          <button
-            type="submit"
-            className="bg-[var(--accent)] text-white py-2 rounded-[var(--radius)] hover:bg-[var(--accent-dark)] transition"
-          >
+          <button type="submit" className="bg-[var(--accent)] text-white py-2 rounded-[var(--radius)] hover:bg-[var(--accent-dark)] transition">
             Se connecter
           </button>
         </form>
@@ -64,7 +45,6 @@ export default function PageConnexion() {
             Créer un compte
           </a>
         </p>
-
       </div>
     </main>
   );
