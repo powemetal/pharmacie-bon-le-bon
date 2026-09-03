@@ -8,7 +8,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [colorblind, setColorblind] = useState(false);
 
-  // Applique la classe sur le body
+  // Applique la classe sur le body pour tout le site
   useEffect(() => {
     if (colorblind) {
       document.body.classList.add("colorblind");
@@ -18,7 +18,7 @@ export default function Header() {
   }, [colorblind]);
 
   return (
-    <header className="bg-green-700 text-white shadow-md">
+    <header className={`shadow-md transition-colors duration-300 text-white ${colorblind ? "bg-blue-800" : "bg-green-700"}`}>
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
         {/* LEFT — Logo cliquable */}
@@ -102,9 +102,11 @@ export default function Header() {
           {/* Toggle Daltonien */}
           <button
             onClick={() => setColorblind(!colorblind)}
-            className="px-3 py-1.5 rounded bg-white text-green-700 font-semibold text-xs hover:bg-gray-200 transition"
+            className={`px-3 py-1.5 rounded font-semibold text-xs transition bg-white ${
+              colorblind ? "text-blue-800 hover:bg-blue-50" : "text-green-700 hover:bg-gray-100"
+            }`}
           >
-            Daltonien : {colorblind ? "ON" : "OFF"}
+            Contraste Élevé : {colorblind ? "ON" : "OFF"}
           </button>
 
           {/* Hamburger */}
@@ -119,7 +121,9 @@ export default function Header() {
 
       {/* Menu mobile */}
       {open && (
-        <div className="bg-green-800 px-6 py-4 space-y-2 text-lg">
+        <div className={`px-6 py-4 space-y-2 text-lg transition-colors duration-300 ${
+          colorblind ? "bg-blue-900" : "bg-green-800"
+        }`}>
           <Link href="/catalogue" className="block py-2 catalogue:hidden" onClick={() => setOpen(false)}>Catalogue</Link>
           <Link href="/circulaire" className="block py-2 circulaire:hidden" onClick={() => setOpen(false)}>Circulaire</Link>
           <Link href="/ressources" className="block py-2 ressources:hidden" onClick={() => setOpen(false)}>Ressources santé</Link>
@@ -127,7 +131,7 @@ export default function Header() {
           <Link href="/mon-dossier" className="block py-2 dossier:hidden" onClick={() => setOpen(false)}>Mon dossier</Link>
           <Link href="/contact" className="block py-2 contact:hidden" onClick={() => setOpen(false)}>Contact</Link>
 
-          <hr className="border-green-600 my-2" />
+          <hr className="border-current opacity-30 my-2" />
 
           <Link href="/connexion" className="block py-2 connexion:hidden" onClick={() => setOpen(false)}>Connexion</Link>
           <Link href="/enregistrer" className="block py-2 connexion:hidden" onClick={() => setOpen(false)}>Créer un compte</Link>
